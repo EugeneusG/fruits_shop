@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Fruit's Shop{% endblock %}</title>
+    <link href='{% static "css/base.css" %}' rel="stylesheet">
+</head>
+<body>
+<div id="header">
+    <a href="/" class="logo">Fruit's Shop</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Your cart:
+                <a href="{% url "cart:cart_detail" %}">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    ${{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Your cart is empty.
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+<hr>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>About us:</h3>
+            <p>We are a fast-growing team of interested people for whom fruits are part of life. Our main goal is to provide the possibility of ordering and receiving delicious fruits by people, regardless of their place of residence. Our suppliers are time tested, and their fruits are tested too. By us =)<br> We hope that you will be satisfied with our service and recommend us to your friends and relatives! </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Contacts:</h3>
+            <p>E-mail: zhenya9911@mail.ru</p>
+            <p>Phone number: +7(909)416-94-16</p>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+</body>
+</html>
